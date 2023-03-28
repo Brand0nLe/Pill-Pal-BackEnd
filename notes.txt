@@ -1,0 +1,51 @@
+Pill Pall Api Notes
+
+    // Goals
+        Create an api for the front end of our Fullstack App. This API must handle all CRUD functions
+
+        In this app, the user should be able to:
+            
+            Login/Create an account
+            Create Profiles that:
+               Save information (Name, Photos, Birthday, Address, Allergies, Medical History, Dr. info, Pharm info.) 
+               Track Current Medications (Names and Dosage)
+            See Schedule of Medications
+            See Medication History
+
+    CodeBase Structure
+
+    // Controllers 
+
+        Controllers              //Folder
+            UserController         // File
+                Login               //Endpoint
+                Create A User
+                Update User
+                Delete A User         
+
+
+            MedicationController   // File
+
+        Services                 // Folder
+            Context                // Folder
+                DataContext          // File
+
+            UserService            // File
+            
+            MedicationService      // File
+            
+            PasswordService        // File
+
+    // Models
+
+        Models                  // Folder
+            UserModel              // File
+            MedicationModel        // File
+
+
+-~~-~~-~~-~~-~~-~Items above are saved to DB~-~~-~~-~~-~~-~~-~~-
+    
+    // DTOs                     // Folder
+        LoginDTO                   // File
+        CreateAccountDTO           // File
+        PasswordDTO                // File

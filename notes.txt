@@ -31,21 +31,83 @@ Pill Pall Api Notes
                 DataContext          // File
 
             UserService            // File
+                GetUserByUsername (login)
+                Login              // Function
+                Update User
+
+            DependentService
+                Get Dependents' Profile  //Function
+
             
             MedicationService      // File
-            
+                Link Medication to Dependent by ID
+                Get Medication List
+                Create New Medication
+                Update Medication
+                Move Medication to History
+                Delete Medication
+
+
             PasswordService        // File
+                Hash Password
+                Verify Hash Password
 
     // Models
 
         Models                  // Folder
             UserModel              // File
-            MedicationModel        // File
+                int UserID
+                string UserName
+                string Salt
+                string Hash
+
+        DependentModel        // File
+                int ID
+                string Name
+                ? Photos 
+                string Birthday 
+                string Address 
+                array Allergies 
+                array Medical History 
+                array Dr. info 
+                array Pharm info.
+
+        MedicationModel        // File
+                int ID
+                string Med Name
+                string Dosage (strength)
+                string Dosage (quanity taken)
+                string Med Direction
+                int Quantity Medication
+                int Refill Quantity
+                int Start Date
+                int End Date
+                string Med Reason
+                string Dr. Name
+                string Dr. Contact
+                string Pharmacy
+                string Pharmacy Contact
+                string Potential Side Effects
+                string Notes
+                bool Any Meds Left (yes or no)
+                bool 20 Meds Left (alert)
+                ? Photo
+                bool Deleted
+
 
 
 -~~-~~-~~-~~-~~-~Items above are saved to DB~-~~-~~-~~-~~-~~-~~-
     
     // DTOs                     // Folder
         LoginDTO                   // File
+            string Username
+            string Password
+
         CreateAccountDTO           // File
+            int ID = 0
+            string Username
+            string Password
+
         PasswordDTO                // File
+            string Salt
+            string Hash

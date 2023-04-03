@@ -4,9 +4,8 @@ namespace pillpalbackend.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class PillPalController : ControllerBase
+public class UserController : ControllerBase
 {
-    // [HttpGet]
-    // [Route ("PillPal")]
+    
 
 }

@@ -56,7 +56,7 @@ Pill Pall Api Notes
 
         Models                  // Folder
             UserModel              // File
-                int UserID
+                int ID
                 string UserName
                 string Salt
                 string Hash
@@ -111,3 +111,9 @@ Pill Pall Api Notes
         PasswordDTO                // File
             string Salt
             string Hash
+
+
+Database Login:
+
+Username: 
+Password: AdderallAvenger

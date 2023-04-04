@@ -115,5 +115,7 @@ Pill Pall Api Notes
 
 Database Login:
 
-Username: 
-Password: AdderallAvenger
+Username: PillPalAdmin 
+Password: AdderallAvenger!
+
+pillpal.database.windows.net

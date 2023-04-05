@@ -16,7 +16,8 @@ public class UserController : ControllerBase
     //Login
 
     //Add a user
-    
+    [HttpPost]
+    [Route("AddUser")]
     public bool AddUser(CreateAccountDTO UserToAdd)
     {
         return _data.AddUser(UserToAdd);

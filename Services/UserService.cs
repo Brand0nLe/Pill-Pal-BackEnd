@@ -42,7 +42,7 @@ namespace pillpalbackend.Services
                 UserModel newUser = new UserModel();
                 // create our salt and hash password
                 var hashPassword = HashPassword(UserToAdd.Password); 
-                newUser.ID = UserToAdd.ID;
+                newUser.Id = UserToAdd.Id;
                 newUser.Username = UserToAdd.Username;
                 newUser.Salt = hashPassword.Salt;
                 newUser.Hash = hashPassword.Hash;

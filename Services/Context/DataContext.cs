@@ -2,19 +2,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using pillpalbackend.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace pillpalbackend.Services.Context
 {
-    public class DataContext : DBContext
+    public class DataContext : DbContext
     {
-        public DirectoryBrowserExtensions<UserModel> UserInfo { get; set;}
-        public DirectoryBrowserExtensions<DependentModel> DependentInfo { get; set;}
-        public DirectoryBrowserExtensions<MedicationModel> MedicationInfo { get; set;}
+        public DbSet<UserModel> UserInfo { get; set;}
+        public DbSet<DependentModel> DependentInfo { get; set;}
+        public DbSet<MedicationModel> MedicationInfo { get; set;}
 
         public DataContext(DbContextOptions options): base(options)
         {}
 
-        protected override void OnModelCreating(ModelsBuilder builder){
+        protected override void OnModelCreating(ModelBuilder builder){
             base.OnModelCreating(builder);
         }
     }

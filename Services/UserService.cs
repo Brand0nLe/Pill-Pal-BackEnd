@@ -6,10 +6,15 @@ using System.Security.Cryptography;
 using pillpalbackend.Models;
 using pillpalbackend.Models.DTO;
 using pillpalbackend.Services.Context;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
+using System.Security.Claims;
 
 namespace pillpalbackend.Services
 {
-    public class UserService
+    public class UserService : ControllerBase
     {
         private readonly DataContext _context;
         public UserService(DataContext context)
@@ -50,7 +55,7 @@ namespace pillpalbackend.Services
                 _context.Add(newUser);
 
                 // This saves to our database and returns the number of entries that were written to the database
-                // _context.SaveChanges();
+                _context.SaveChanges();
                 result = _context.SaveChanges() != 0;
             }
 

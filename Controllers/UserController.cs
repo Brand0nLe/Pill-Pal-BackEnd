@@ -8,13 +8,19 @@ namespace pillpalbackend.Controllers;
 [Route("[controller]")]
 public class UserController : ControllerBase
 {
+
     private readonly UserService _data;
     public UserController(UserService dataFromService)
     {
         _data = dataFromService;
     }
     //Login
-
+    [HttpGet]
+    [Route("Test")]
+    public bool Testing()
+    {
+        return true;
+    }
     //Add a user
     [HttpPost]
     [Route("AddUser")]

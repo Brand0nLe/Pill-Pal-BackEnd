@@ -1,9 +1,13 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using pillpalbackend.Models.DTO;
 using pillpalbackend.Services;
 
-namespace pillpalbackend.Controllers;
-
+namespace pillpalbackend.Controllers
+{
 [ApiController]
 [Route("[controller]")]
 public class UserController : ControllerBase
@@ -31,4 +35,5 @@ public class UserController : ControllerBase
     //Update User Account
 
     //Delete User Account
+}
 }

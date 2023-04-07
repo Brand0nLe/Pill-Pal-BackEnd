@@ -55,7 +55,7 @@ namespace pillpalbackend.Services
                 _context.Add(newUser);
 
                 // This saves to our database and returns the number of entries that were written to the database
-                _context.SaveChanges();
+                // _context.SaveChanges();
                 result = _context.SaveChanges() != 0;
             }
 

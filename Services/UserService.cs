@@ -29,29 +29,29 @@ namespace pillpalbackend.Services
             // if no item matches the condition, it will return null
             // if multiple items match, an error will occur
 
-             return _context.UserInfo.SingleOrDefault(user => user.Username == Username ) != null;
+            return _context.UserInfo.SingleOrDefault(user => user.Username == Username) != null;
 
-                // object != null, true
-                // null != null, false
-        } 
+            // object != null, true
+            // null != null, false
+        }
 
         public bool AddUser(CreateAccountDTO UserToAdd)
         {
             //If the user already exists
             //If they do not exist, we will create the account
             bool result = false;
-            if(!DoesUserExist(UserToAdd.Username))
+            if (!DoesUserExist(UserToAdd.Username))
             {
                 //if the user does not exist
                 // creating a new instance of user model (empty object)
                 UserModel newUser = new UserModel();
                 // create our salt and hash password
-                var hashPassword = HashPassword(UserToAdd.Password); 
+                var hashPassword = HashPassword(UserToAdd.Password);
                 newUser.Id = UserToAdd.Id;
                 newUser.Username = UserToAdd.Username;
                 newUser.Salt = hashPassword.Salt;
                 newUser.Hash = hashPassword.Hash;
-                
+
                 _context.Add(newUser);
 
                 // This saves to our database and returns the number of entries that were written to the database
@@ -64,32 +64,32 @@ namespace pillpalbackend.Services
         }
 
 
-            public PasswordDTO HashPassword(string? password)
-            {
-                PasswordDTO newHashedPassword = new PasswordDTO();
+        public PasswordDTO HashPassword(string? password)
+        {
+            PasswordDTO newHashedPassword = new PasswordDTO();
 
-                // this is a byte array with a length of 64
-                byte[] SaltByte = new byte[64];
-                var provider = new RNGCryptoServiceProvider();
-                // enhance rng of numbers without using zero
-                provider.GetNonZeroBytes(SaltByte);
-                // encoding the 64 digits to string
-                // salt makes the hash unique to the user
-                // if we only have a hash password, same passwords would match hashes (not good) 
-                var Salt = Convert.ToBase64String(SaltByte);
+            // this is a byte array with a length of 64
+            byte[] SaltByte = new byte[64];
+            var provider = new RNGCryptoServiceProvider();
+            // enhance rng of numbers without using zero
+            provider.GetNonZeroBytes(SaltByte);
+            // encoding the 64 digits to string
+            // salt makes the hash unique to the user
+            // if we only have a hash password, same passwords would match hashes (not good) 
+            var Salt = Convert.ToBase64String(SaltByte);
 
-                Rfc2898DeriveBytes rfc2898DeriveBytes = new Rfc2898DeriveBytes(password, SaltByte, 10000);
+            Rfc2898DeriveBytes rfc2898DeriveBytes = new Rfc2898DeriveBytes(password, SaltByte, 10000);
 
-                //encoding our password with out salt
-                // if anyone would brute force this, it would take a decade (without a quantum computer)
-                var Hash = Convert.ToBase64String(rfc2898DeriveBytes.GetBytes(256));
+            //encoding our password with out salt
+            // if anyone would brute force this, it would take a decade (without a quantum computer)
+            var Hash = Convert.ToBase64String(rfc2898DeriveBytes.GetBytes(256));
 
-                newHashedPassword.Salt = Salt;
-                newHashedPassword.Hash = Hash;
+            newHashedPassword.Salt = Salt;
+            newHashedPassword.Hash = Hash;
 
-                return newHashedPassword;
-            }
-        
+            return newHashedPassword;
+        }
+
         public bool VerifyUserPassword(string? Password, string? storedHash, string? storedSalt)
         {
             // get our existing Salt and change it to base64 string
@@ -100,6 +100,42 @@ namespace pillpalbackend.Services
             var newHash = Convert.ToBase64String(rfc2898DeriveBytes.GetBytes(256));
             // checking and returning if the new hash is the same as the old hash
             return newHash == storedHash;
+        }
+
+        public IActionResult Login(LoginDTO User)
+        {   //want to return an error code if the user does not have a valid username or password
+            IActionResult Result = Unauthorized();
+
+
+            //check to see if the user exists
+            if(DoesUserExist(User.Username)){
+                //true
+                //we want to store the user object
+                // To create another helper function 
+                UserModel foundUser = GetUserByUsername(User.Username);
+                //check if the password is correct
+                if(VerifyUserPassword(User.Password, foundUser.Hash, foundUser.Salt)){
+                    var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes
+                     ("superSecretKey@345"));
+                    var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+                    var tokeOptions = new JwtSecurityToken(
+                        issuer: "http://localhost:5000",
+                        audience: "http://localhost:5000",
+                        claims: new List<Claim>(),
+                        expires: DateTime.Now.AddMinutes(30),
+                        signingCredentials: signinCredentials
+                    );
+                    var tokenString = new JwtSecurityTokenHandler().WriteToken
+                    (tokeOptions);
+                    Result = Ok(new { Token = tokenString });
+                }
+            }
+
+            return Result;
+        }
+
+        public UserModel GetUserByUsername(string? username){
+            return _context.UserInfo.SingleOrDefault(user => user.Username == username);
         }
     }
 }

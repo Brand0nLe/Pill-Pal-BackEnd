@@ -19,6 +19,15 @@ public class UserController : ControllerBase
         _data = dataFromService;
     }
     //Login
+    [HttpPost]
+    [Route("Login")]
+    public IActionResult Login([FromBody]LoginDTO User)
+    {
+        return _data.Login(User);
+    }
+
+
+
     [HttpGet]
     [Route("Test")]
     public bool Testing()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using pillpalbackend.Models;
 using pillpalbackend.Models.DTO;
 using pillpalbackend.Services;
 
@@ -34,6 +35,7 @@ public class UserController : ControllerBase
     {
         return true;
     }
+
     //Add a user
     [HttpPost]
     [Route("AddUser")]
@@ -41,8 +43,26 @@ public class UserController : ControllerBase
     {
         return _data.AddUser(UserToAdd);
     }
+
     //Update User Account
+    // [HttpPost]
+    // [Route("UpdateUser")]
+    // public bool UpdateUser(UserModel userToUpdate){
+    //     return _data.UpdateUser(userToUpdate);
+    // }
+
+    [HttpPost]
+    [Route("UpdateUser/{id}/{username}")]
+    public bool UpdateUser(int id, string username){
+        return _data.UpdateUsername(id, username);
+    }
+
 
     //Delete User Account
+    [HttpPost]
+    [Route("DeleteUser/{userToDelete}")]
+        public bool DeleteUser(string userToDelete){
+            return _data.DeleteUser(userToDelete);
+        }
 }
 }

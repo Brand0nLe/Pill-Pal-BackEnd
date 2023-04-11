@@ -40,6 +40,8 @@ if (app.Environment.IsDevelopment())
 
 // app.UseHttpsRedirection();
 
+app.UseCors("BlogPolicy");
+
 app.UseAuthorization();
 
 app.MapControllers();

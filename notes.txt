@@ -118,4 +118,5 @@ Database Login:
 Username: PillPalAdmin 
 Password: AdderallAvenger!
 
+pillpalapi.azurewebsites.net
 pillpal.database.windows.net

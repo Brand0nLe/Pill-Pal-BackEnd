@@ -15,7 +15,7 @@ builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(conne
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("BlogPolicy",
+    options.AddPolicy("PillPolicy",
     builder =>
     {
         builder.WithOrigins("http://localhost:3000")
@@ -40,7 +40,7 @@ if (app.Environment.IsDevelopment())
 
 // app.UseHttpsRedirection();
 
-app.UseCors("BlogPolicy");
+app.UseCors("PillPolicy");
 
 app.UseAuthorization();
 

@@ -17,8 +17,11 @@ namespace pillpalbackend.Models
         public string? StartDate { get; set; }
         public string? EndDate { get; set; }
         public string? MedicationReason { get; set; }
-        // public string[]? DoctorInfo { get; set; }
-        // public string[]? PharmacyInfo { get; set; }
+        public string? DoctorName { get; set; }
+        public string? DoctorContact { get; set; }
+        public string? PharmacyName { get; set; }
+        public string? PharmacyLocation { get; set; }
+        public string? PharmacyContact { get; set; }
         public string? SideEffects { get; set; }
         public string? Notes { get; set; }
         public bool MedsLeft { get; set; }

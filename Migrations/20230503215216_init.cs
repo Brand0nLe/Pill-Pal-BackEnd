@@ -40,6 +40,11 @@ namespace pillpalbackend.Migrations
                     StartDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EndDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MedicationReason = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DoctorName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DoctorContact = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PharmacyName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PharmacyLocation = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PharmacyContact = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SideEffects = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MedsLeft = table.Column<bool>(type: "bit", nullable: false),
@@ -57,6 +62,8 @@ namespace pillpalbackend.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Salt = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Hash = table.Column<string>(type: "nvarchar(max)", nullable: true)

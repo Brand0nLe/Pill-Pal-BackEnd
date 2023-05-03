@@ -48,6 +48,8 @@ namespace pillpalbackend.Services
                 // create our salt and hash password
                 var hashPassword = HashPassword(UserToAdd.Password);
                 newUser.Id = UserToAdd.Id;
+                newUser.FirstName = UserToAdd.FirstName;
+                newUser.LastName = UserToAdd.LastName;
                 newUser.Username = UserToAdd.Username;
                 newUser.Salt = hashPassword.Salt;
                 newUser.Hash = hashPassword.Hash;

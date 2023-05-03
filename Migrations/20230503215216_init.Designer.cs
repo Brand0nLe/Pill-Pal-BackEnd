@@ -11,7 +11,7 @@ using pillpalbackend.Services.Context;
 namespace pillpalbackend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230407175543_init")]
+    [Migration("20230503215216_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -57,6 +57,12 @@ namespace pillpalbackend.Migrations
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
+                    b.Property<string>("DoctorContact")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DoctorName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("DosageQuantity")
                         .HasColumnType("nvarchar(max)");
 
@@ -87,6 +93,15 @@ namespace pillpalbackend.Migrations
                     b.Property<string>("Notes")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PharmacyContact")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PharmacyLocation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PharmacyName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("RefillQuantity")
                         .HasColumnType("int");
 
@@ -109,7 +124,13 @@ namespace pillpalbackend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Hash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Salt")

@@ -2,11 +2,138 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
+using pillpalbackend.Models;
+using pillpalbackend.Models.DTO;
+using pillpalbackend.Services.Context;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
+using System.Security.Claims;
 
 namespace pillpalbackend.Services
 {
-    public class PillPalService
+    public class PillPalService : ControllerBase
     {
-        
+        private const string BaseUrl = "https://api.fda.gov/drug/ndc.json?search=";
+
+        private readonly DataContext _context;
+        public PillPalService(DataContext context)
+        {
+            _context = context;
+        }
+
+
+        public async Task<MedicationDTO> SaveMedication(string medicationName)
+        {
+            using (var client = new HttpClient())
+            {
+                var response = await client.GetAsync(BaseUrl + medicationName);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    var medication = new MedicationDTO(responseContent);
+                    return medication;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        public bool DoesMedicationExist(string? MedicationName)
+        {
+            // check the table to see if the username exists
+            // if 1 item matches the condition, we will return the item
+            // if no item matches the condition, it will return null
+            // if multiple items match, an error will occur
+
+            return _context.MedicationInfo.SingleOrDefault(user => user.MedicationName == MedicationName) != null;
+
+            // object != null, true
+            // null != null, false
+        }
+
+        public bool AddMedication(MedicationDTO MedicationToAdd)
+        {
+            //If the user already exists
+            //If they do not exist, we will create the account
+            bool result = false;
+            if (!DoesMedicationExist(MedicationToAdd.MedicationName))
+            {
+                //if the user does not exist
+                // creating a new instance of user model (empty object)
+                MedicationModel newMedicine = new MedicationModel();
+                // create our salt and hash password
+                newMedicine.Id = MedicationToAdd.Id;
+                newMedicine.DosageStrength = MedicationToAdd.DosageStrength;
+                newMedicine.DosageQuantity = MedicationToAdd.DosageQuantity;
+                newMedicine.MedicationDirection = MedicationToAdd.MedicationDirection;
+                newMedicine.MedicationQuantity = MedicationToAdd.MedicationQuantity;
+                newMedicine.RefillQuantity = MedicationToAdd.RefillQuantity;
+                newMedicine.StartDate = MedicationToAdd.StartDate;
+                newMedicine.EndDate = MedicationToAdd.EndDate;
+                newMedicine.MedicationReason = MedicationToAdd.MedicationReason;
+                newMedicine.DoctorName = MedicationToAdd.DoctorName;
+                newMedicine.DoctorContact = MedicationToAdd.DoctorContact;
+                newMedicine.PharmacyName = MedicationToAdd.PharmacyName;
+                newMedicine.PharmacyLocation = MedicationToAdd.PharmacyLocation;
+                newMedicine.PharmacyContact = MedicationToAdd.PharmacyContact;
+                newMedicine.SideEffects = MedicationToAdd.SideEffects;
+                newMedicine.Notes = MedicationToAdd.Notes;
+                newMedicine.MedsLeft = MedicationToAdd.MedsLeft;
+                newMedicine.MedsLeftReminder = MedicationToAdd.MedsLeftReminder;
+                newMedicine.Deleted = MedicationToAdd.Deleted;
+
+                _context.Add(newMedicine);
+
+                // This saves to our database and returns the number of entries that were written to the database
+                // _context.SaveChanges();
+                result = _context.SaveChanges() != 0;
+            }
+
+            return result;
+            //Else throw a false
+        }
     }
 }
+
+
+
+
+// using System;
+// using System.Collections.Generic;
+// using System.Linq;
+// using System.Threading.Tasks;
+// using System.Security.Cryptography;
+// using pillpalbackend.Models;
+// using pillpalbackend.Models.DTO;
+// using pillpalbackend.Services.Context;
+// using Microsoft.AspNetCore.Mvc;
+// using Microsoft.IdentityModel.Tokens;
+// using System.IdentityModel.Tokens.Jwt;
+// using System.Text;
+// using System.Security.Claims;
+// namespace pillpalbackend.Services
+// {
+//     public class PillPalService : ControllerBase
+//     {
+//         private const string BaseUrl = "https://api.fda.gov/drug/ndc.json?search=";
+//         public async MedicationDTO SaveMedication(string? MedicationName)
+//         {
+
+//             using (var client = new HttpClient())
+//             {
+
+//             var response = await client.GetAsync(BaseUrl + MedicationName);
+//             if (response.IsSuccessStatusCode){
+
+//             return response;
+//             }else return null;
+//             }
+//         }
+//     }
+// }

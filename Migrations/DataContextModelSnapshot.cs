@@ -121,13 +121,13 @@ namespace pillpalbackend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("FirstName")
+                    b.Property<string>("Firstname")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Hash")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LastName")
+                    b.Property<string>("Lastname")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Salt")

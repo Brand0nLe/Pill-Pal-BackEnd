@@ -11,7 +11,7 @@ using pillpalbackend.Services.Context;
 namespace pillpalbackend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230503215216_init")]
+    [Migration("20230504205427_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -124,13 +124,13 @@ namespace pillpalbackend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("FirstName")
+                    b.Property<string>("Firstname")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Hash")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LastName")
+                    b.Property<string>("Lastname")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Salt")

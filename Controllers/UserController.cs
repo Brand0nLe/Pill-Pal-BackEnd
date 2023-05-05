@@ -53,7 +53,8 @@ public class UserController : ControllerBase
 
     [HttpPost]
     [Route("UpdateUser/{id}/{username}")]
-    public bool UpdateUser(int id, string username){
+    public bool UpdateUser(int id, string username)
+    {
         return _data.UpdateUsername(id, username);
     }
 
@@ -61,7 +62,8 @@ public class UserController : ControllerBase
     //Delete User Account
     [HttpPost]
     [Route("DeleteUser/{userToDelete}")]
-        public bool DeleteUser(string userToDelete){
+        public bool DeleteUser(string userToDelete)
+        {
             return _data.DeleteUser(userToDelete);
         }
 }

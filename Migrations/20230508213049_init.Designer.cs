@@ -11,7 +11,7 @@ using pillpalbackend.Services.Context;
 namespace pillpalbackend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230504205427_init")]
+    [Migration("20230508213049_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -76,6 +76,7 @@ namespace pillpalbackend.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MedicationName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("MedicationQuantity")

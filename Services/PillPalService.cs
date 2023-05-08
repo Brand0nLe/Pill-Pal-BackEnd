@@ -46,15 +46,9 @@ namespace pillpalbackend.Services
 
         public bool DoesMedicationExist(string? MedicationName)
         {
-            // check the table to see if the username exists
-            // if 1 item matches the condition, we will return the item
-            // if no item matches the condition, it will return null
-            // if multiple items match, an error will occur
 
             return _context.MedicationInfo.SingleOrDefault(user => user.MedicationName == MedicationName) != null;
 
-            // object != null, true
-            // null != null, false
         }
 
         public bool AddMedication(MedicationDTO MedicationToAdd)
@@ -69,6 +63,7 @@ namespace pillpalbackend.Services
                 MedicationModel newMedicine = new MedicationModel();
                 // create our salt and hash password
                 newMedicine.Id = MedicationToAdd.Id;
+                newMedicine.MedicationName = MedicationToAdd.MedicationName;
                 newMedicine.DosageStrength = MedicationToAdd.DosageStrength;
                 newMedicine.DosageQuantity = MedicationToAdd.DosageQuantity;
                 newMedicine.MedicationDirection = MedicationToAdd.MedicationDirection;

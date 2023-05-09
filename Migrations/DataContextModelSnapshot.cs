@@ -73,7 +73,6 @@ namespace pillpalbackend.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MedicationName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("MedicationQuantity")

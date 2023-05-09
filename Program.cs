@@ -18,7 +18,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("PillPolicy",
     builder =>
     {
-        builder.WithOrigins("http://localhost:3000", "http://localhost:3001", "http://localhost:3002", "http://localhost:3003", "pillpalapi.azurewebsites.net")
+        builder.WithOrigins("http://localhost:3000", "http://localhost:3001", "http://localhost:3002", "http://localhost:3003", "https://pillpalapi.azurewebsites.net")
         .AllowAnyHeader()
         .AllowAnyMethod();
     });

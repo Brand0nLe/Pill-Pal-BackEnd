@@ -8,6 +8,7 @@ namespace pillpalbackend.Models.DTO
     public class MedicationDTO
     {
         public int Id { get; set; }
+        public int? UserId { get; set; }
         public string? MedicationName { get; set; }
         public string? DosageStrength { get; set; }
         public string? DosageQuantity { get; set; }

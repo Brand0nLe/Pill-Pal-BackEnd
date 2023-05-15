@@ -36,6 +36,21 @@ public class UserController : ControllerBase
         return true;
     }
 
+
+    [HttpGet]
+    [Route("IdSearch/{id}")]
+    public object IdSearch(int id)
+    {
+        return _data.GetUserById(id);
+    }
+
+    [HttpGet]
+    [Route("UserSearch/{username}")]
+    public object Username(string username)
+    {
+        return _data.GetUserByUsername(username);
+    }
+
     //Add a user
     [HttpPost]
     [Route("AddUser")]

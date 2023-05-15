@@ -53,15 +53,13 @@ namespace pillpalbackend.Services
 
         public bool AddMedication(MedicationDTO MedicationToAdd)
         {
-            //If the user already exists
-            //If they do not exist, we will create the account
+
             bool result = false;
             if (!DoesMedicationExist(MedicationToAdd.MedicationName))
             {
-                //if the user does not exist
-                // creating a new instance of user model (empty object)
+ 
                 MedicationModel newMedicine = new MedicationModel();
-                // create our salt and hash password
+ 
                 newMedicine.Id = MedicationToAdd.Id;
                 newMedicine.MedicationName = MedicationToAdd.MedicationName;
                 newMedicine.DosageStrength = MedicationToAdd.DosageStrength;

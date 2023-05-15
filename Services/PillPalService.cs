@@ -51,12 +51,16 @@ namespace pillpalbackend.Services
 
         }
 
+        public object GetMedicationByUserId(int LookingUserId){
+            return _context.MedicationInfo.Where(Medication => Medication.UserId == LookingUserId);
+        }
+
         public bool AddMedication(MedicationDTO MedicationToAdd)
         {
 
             bool result = false;
-            if (!DoesMedicationExist(MedicationToAdd.MedicationName))
-            {
+            // if (!DoesMedicationExist(MedicationToAdd.MedicationName))
+            
  
                 MedicationModel newMedicine = new MedicationModel();
  
@@ -88,7 +92,7 @@ namespace pillpalbackend.Services
                 // This saves to our database and returns the number of entries that were written to the database
                 // _context.SaveChanges();
                 result = _context.SaveChanges() != 0;
-            }
+            
 
             return result;
             //Else throw a false

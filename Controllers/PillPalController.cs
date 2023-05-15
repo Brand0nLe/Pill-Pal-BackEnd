@@ -33,5 +33,12 @@ public class PillPalController : ControllerBase
         return _data.AddMedication(MedicationToAdd);
     }
 
+    [HttpGet]
+    [Route("GetMedication/{UserId}")]
+    public object ListMeds(int UserId)
+    {
+        return _data.GetMedicationByUserId(UserId);
+    }
+
 }
 }

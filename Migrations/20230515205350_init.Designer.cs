@@ -12,7 +12,7 @@ using pillpalbackend.Services.Context;
 namespace pillpalbackend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230515175644_init")]
+    [Migration("20230515205350_init")]
     partial class init
     {
         /// <inheritdoc />

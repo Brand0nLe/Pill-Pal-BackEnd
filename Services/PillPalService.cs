@@ -61,6 +61,8 @@ namespace pillpalbackend.Services
                 MedicationModel newMedicine = new MedicationModel();
  
                 newMedicine.Id = MedicationToAdd.Id;
+                newMedicine.Test = MedicationToAdd.Test;
+                newMedicine.UserId = MedicationToAdd.UserId;
                 newMedicine.MedicationName = MedicationToAdd.MedicationName;
                 newMedicine.DosageStrength = MedicationToAdd.DosageStrength;
                 newMedicine.DosageQuantity = MedicationToAdd.DosageQuantity;

@@ -8,6 +8,7 @@ namespace pillpalbackend.Models
     public class MedicationModel
     {
         public int Id { get; set; }
+        public string? Test { get; set; }
         public int? UserId { get; set; }
         public string? MedicationName { get; set; }
         public string? DosageStrength { get; set; }

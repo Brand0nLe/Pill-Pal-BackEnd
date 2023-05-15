@@ -31,6 +31,8 @@ namespace pillpalbackend.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Test = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: true),
                     MedicationName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DosageStrength = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DosageQuantity = table.Column<string>(type: "nvarchar(max)", nullable: true),

@@ -52,7 +52,11 @@ namespace pillpalbackend.Services
         }
 
         public object GetMedicationByUserId(int LookingUserId){
-            return _context.MedicationInfo.Where(Medication => Medication.UserId == LookingUserId);
+            return _context.MedicationInfo.Where(Medication => Medication.UserId == LookingUserId).Select(medication => new
+        {
+            medication.MedicationName,
+            medication.DosageStrength
+        }).ToList();
         }
 
         public bool AddMedication(MedicationDTO MedicationToAdd)

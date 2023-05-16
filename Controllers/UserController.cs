@@ -59,12 +59,6 @@ public class UserController : ControllerBase
         return _data.AddUser(UserToAdd);
     }
 
-    //Update User Account
-    // [HttpPost]
-    // [Route("UpdateUser")]
-    // public bool UpdateUser(UserModel userToUpdate){
-    //     return _data.UpdateUser(userToUpdate);
-    // }
 
     [HttpPost]
     [Route("UpdateUser/{id}/{username}")]

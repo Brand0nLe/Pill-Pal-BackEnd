@@ -41,6 +41,13 @@ public class PillPalController : ControllerBase
     }
 
     [HttpGet]
+    [Route("AddDependent/{UserId}")]
+    public object ListDependents(int UserId)
+    {
+        return _data.GetDependentByUserId(UserId);
+    }
+
+    [HttpGet]
     [Route("GetMedication/{UserId}")]
     public object ListMeds(int UserId)
     {

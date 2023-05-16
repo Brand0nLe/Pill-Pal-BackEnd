@@ -8,6 +8,8 @@ namespace pillpalbackend.Models
     public class DependentModel
     {
         public int Id { get; set; }
+        public int? DependentId { get; set; }
+        public int? UserId { get; set; }
         public string? Name { get; set; }
         public string? Birthday { get; set; }
         public string? Address { get; set; }

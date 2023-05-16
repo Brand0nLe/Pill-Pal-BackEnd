@@ -25,6 +25,7 @@ namespace pillpalbackend.Services
         }
 
 
+        //This is currently not being used, it is supposed to use the FDA api to save informatiom about the Medication being passed in
         public async Task<MedicationDTO> SaveMedication(string medicationName)
         {
             using (var client = new HttpClient())
@@ -56,6 +57,15 @@ namespace pillpalbackend.Services
         {
             medication.MedicationName,
             medication.DosageStrength
+        }).ToList();
+        }
+
+        public object GetDependentByUserId(int LookingUserId){
+            return _context.DependentInfo.Where(Dependent => Dependent.UserId == LookingUserId).Select(Dependent => new
+        {
+            Dependent.Id,
+            Dependent.UserId,
+            Dependent.Name
         }).ToList();
         }
 

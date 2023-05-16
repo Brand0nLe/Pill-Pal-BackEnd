@@ -100,43 +100,30 @@ namespace pillpalbackend.Services
 
             return result;
             //Else throw a false
+        
+        }
+        public bool AddDependent(DependentDTO DependentToAdd)
+        {
+
+            bool result = false;
+            
+ 
+                DependentModel newDependent = new DependentModel();
+ 
+                newDependent.Id = DependentToAdd.Id;
+                newDependent.Name = DependentToAdd.Name;
+                newDependent.Birthday = DependentToAdd.Birthday;
+                newDependent.Address = DependentToAdd.Address;
+                
+                _context.Add(newDependent);
+
+                // This saves to our database and returns the number of entries that were written to the database
+                // _context.SaveChanges();
+                result = _context.SaveChanges() != 0;
+            
+
+            return result;
+            //Else throw a false
         }
     }
 }
-
-
-
-
-// using System;
-// using System.Collections.Generic;
-// using System.Linq;
-// using System.Threading.Tasks;
-// using System.Security.Cryptography;
-// using pillpalbackend.Models;
-// using pillpalbackend.Models.DTO;
-// using pillpalbackend.Services.Context;
-// using Microsoft.AspNetCore.Mvc;
-// using Microsoft.IdentityModel.Tokens;
-// using System.IdentityModel.Tokens.Jwt;
-// using System.Text;
-// using System.Security.Claims;
-// namespace pillpalbackend.Services
-// {
-//     public class PillPalService : ControllerBase
-//     {
-//         private const string BaseUrl = "https://api.fda.gov/drug/ndc.json?search=";
-//         public async MedicationDTO SaveMedication(string? MedicationName)
-//         {
-
-//             using (var client = new HttpClient())
-//             {
-
-//             var response = await client.GetAsync(BaseUrl + MedicationName);
-//             if (response.IsSuccessStatusCode){
-
-//             return response;
-//             }else return null;
-//             }
-//         }
-//     }
-// }

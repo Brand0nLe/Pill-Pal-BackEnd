@@ -122,6 +122,12 @@ namespace pillpalbackend.Services
                     var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes
                      ("superSecretKey@345"));
                     var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+
+                    var claims = new List<Claim>
+        {
+            new Claim("userId", foundUser.Id.ToString()) 
+        };
+
                     var tokeOptions = new JwtSecurityToken(
                         issuer: "http://localhost:5000",
                         audience: "http://localhost:5000",
@@ -170,12 +176,14 @@ namespace pillpalbackend.Services
             return _context.UserInfo.SingleOrDefault(user => user.Id == id);
         }
 
-        public bool DeleteUser(string userToDelete){
+        public bool DeleteUser(string userToDelete)
+        {
             //this is just sending over the username
             //we have to get the object to be deleted
             UserModel foundUser = GetUserByUsername(userToDelete);
             bool result = false;
-            if (foundUser != null){
+            if (foundUser != null)
+            {
                 //a user was found
                 _context.Remove<UserModel>(foundUser);
                 result = _context.SaveChanges() != 0;

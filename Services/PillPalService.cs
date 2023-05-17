@@ -52,21 +52,46 @@ namespace pillpalbackend.Services
 
         }
 
-        public object GetMedicationByUserId(int LookingUserId){
-            return _context.MedicationInfo.Where(Medication => Medication.UserId == LookingUserId).Select(medication => new
+        // public object GetMedicationByUserId(int LookingUserId)
+        // {
+        //     return _context.MedicationInfo.Where(Medication => Medication.UserId == LookingUserId).ToList();
+        // }
+
+        public object GetMedicationByUserId(int lookingUserId)
         {
-            medication.MedicationName,
-            medication.DosageStrength
-        }).ToList();
+            var medicationInfo = _context.MedicationInfo
+                .Where(medication => medication.UserId == lookingUserId)
+                .ToList();
+
+            var nonNullFields = medicationInfo.Select(medication =>
+            {
+                var medicationType = medication.GetType();
+                var properties = medicationType.GetProperties();
+
+                var nonNullValues = new Dictionary<string, object>();
+                foreach (var property in properties)
+                {
+                    var value = property.GetValue(medication);
+                    if (value != null)
+                    {
+                        nonNullValues.Add(property.Name, value);
+                    }
+                }
+
+                return nonNullValues;
+            }).ToList();
+
+            return nonNullFields;
         }
 
-        public object GetDependentByUserId(int LookingUserId){
-            return _context.DependentInfo.Where(Dependent => Dependent.UserId == LookingUserId).Select(Dependent => new
+        public object GetDependentByUserId(int LookingUserId)
         {
-            Dependent.Id,
-            Dependent.UserId,
-            Dependent.Name
-        }).ToList();
+            return _context.DependentInfo.Where(Dependent => Dependent.UserId == LookingUserId).Select(Dependent => new
+            {
+                Dependent.Id,
+                Dependent.UserId,
+                Dependent.Name
+            }).ToList();
         }
 
         public bool AddMedication(MedicationDTO MedicationToAdd)
@@ -74,63 +99,63 @@ namespace pillpalbackend.Services
 
             bool result = false;
             // if (!DoesMedicationExist(MedicationToAdd.MedicationName))
-            
- 
-                MedicationModel newMedicine = new MedicationModel();
- 
-                newMedicine.Id = MedicationToAdd.Id;
-                newMedicine.Test = MedicationToAdd.Test;
-                newMedicine.UserId = MedicationToAdd.UserId;
-                newMedicine.MedicationName = MedicationToAdd.MedicationName;
-                newMedicine.DosageStrength = MedicationToAdd.DosageStrength;
-                newMedicine.DosageQuantity = MedicationToAdd.DosageQuantity;
-                newMedicine.MedicationDirection = MedicationToAdd.MedicationDirection;
-                newMedicine.MedicationQuantity = MedicationToAdd.MedicationQuantity;
-                newMedicine.RefillQuantity = MedicationToAdd.RefillQuantity;
-                newMedicine.StartDate = MedicationToAdd.StartDate;
-                newMedicine.EndDate = MedicationToAdd.EndDate;
-                newMedicine.MedicationReason = MedicationToAdd.MedicationReason;
-                newMedicine.DoctorName = MedicationToAdd.DoctorName;
-                newMedicine.DoctorContact = MedicationToAdd.DoctorContact;
-                newMedicine.PharmacyName = MedicationToAdd.PharmacyName;
-                newMedicine.PharmacyLocation = MedicationToAdd.PharmacyLocation;
-                newMedicine.PharmacyContact = MedicationToAdd.PharmacyContact;
-                newMedicine.SideEffects = MedicationToAdd.SideEffects;
-                newMedicine.Notes = MedicationToAdd.Notes;
-                newMedicine.MedsLeft = MedicationToAdd.MedsLeft;
-                newMedicine.MedsLeftReminder = MedicationToAdd.MedsLeftReminder;
-                newMedicine.Deleted = MedicationToAdd.Deleted;
 
-                _context.Add(newMedicine);
 
-                // This saves to our database and returns the number of entries that were written to the database
-                // _context.SaveChanges();
-                result = _context.SaveChanges() != 0;
-            
+            MedicationModel newMedicine = new MedicationModel();
+
+            newMedicine.Id = MedicationToAdd.Id;
+            newMedicine.Test = MedicationToAdd.Test;
+            newMedicine.UserId = MedicationToAdd.UserId;
+            newMedicine.MedicationName = MedicationToAdd.MedicationName;
+            newMedicine.DosageStrength = MedicationToAdd.DosageStrength;
+            newMedicine.DosageQuantity = MedicationToAdd.DosageQuantity;
+            newMedicine.MedicationDirection = MedicationToAdd.MedicationDirection;
+            newMedicine.MedicationQuantity = MedicationToAdd.MedicationQuantity;
+            newMedicine.RefillQuantity = MedicationToAdd.RefillQuantity;
+            newMedicine.StartDate = MedicationToAdd.StartDate;
+            newMedicine.EndDate = MedicationToAdd.EndDate;
+            newMedicine.MedicationReason = MedicationToAdd.MedicationReason;
+            newMedicine.DoctorName = MedicationToAdd.DoctorName;
+            newMedicine.DoctorContact = MedicationToAdd.DoctorContact;
+            newMedicine.PharmacyName = MedicationToAdd.PharmacyName;
+            newMedicine.PharmacyLocation = MedicationToAdd.PharmacyLocation;
+            newMedicine.PharmacyContact = MedicationToAdd.PharmacyContact;
+            newMedicine.SideEffects = MedicationToAdd.SideEffects;
+            newMedicine.Notes = MedicationToAdd.Notes;
+            newMedicine.MedsLeft = MedicationToAdd.MedsLeft;
+            newMedicine.MedsLeftReminder = MedicationToAdd.MedsLeftReminder;
+            newMedicine.Deleted = MedicationToAdd.Deleted;
+
+            _context.Add(newMedicine);
+
+            // This saves to our database and returns the number of entries that were written to the database
+            // _context.SaveChanges();
+            result = _context.SaveChanges() != 0;
+
 
             return result;
             //Else throw a false
-        
+
         }
         public bool AddDependent(DependentDTO DependentToAdd)
         {
 
             bool result = false;
-            
- 
-                DependentModel newDependent = new DependentModel();
- 
-                newDependent.Id = DependentToAdd.Id;
-                newDependent.Name = DependentToAdd.Name;
-                newDependent.Birthday = DependentToAdd.Birthday;
-                newDependent.Address = DependentToAdd.Address;
-                
-                _context.Add(newDependent);
 
-                // This saves to our database and returns the number of entries that were written to the database
-                // _context.SaveChanges();
-                result = _context.SaveChanges() != 0;
-            
+
+            DependentModel newDependent = new DependentModel();
+
+            newDependent.Id = DependentToAdd.Id;
+            newDependent.Name = DependentToAdd.Name;
+            newDependent.Birthday = DependentToAdd.Birthday;
+            newDependent.Address = DependentToAdd.Address;
+
+            _context.Add(newDependent);
+
+            // This saves to our database and returns the number of entries that were written to the database
+            // _context.SaveChanges();
+            result = _context.SaveChanges() != 0;
+
 
             return result;
             //Else throw a false

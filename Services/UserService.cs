@@ -125,7 +125,7 @@ namespace pillpalbackend.Services
 
                     var claims = new List<Claim>
         {
-            new Claim("userId", foundUser.Id.ToString()) 
+            new Claim("userId", foundUser.Id.ToString())
         };
 
                     var tokeOptions = new JwtSecurityToken(
@@ -137,7 +137,7 @@ namespace pillpalbackend.Services
                     );
                     var tokenString = new JwtSecurityTokenHandler().WriteToken
                     (tokeOptions);
-                    Result = Ok(new { Token = tokenString,  userId = foundUser.Id, userFname = foundUser.Firstname, userLname= foundUser.Lastname });
+                    Result = Ok(new { Token = tokenString, userId = foundUser.Id, userFname = foundUser.Firstname, userLname = foundUser.Lastname });
                 }
             }
 
@@ -147,6 +147,16 @@ namespace pillpalbackend.Services
         public UserModel GetUserByUsername(string? username)
         {
             return _context.UserInfo.SingleOrDefault(user => user.Username == username);
+        }
+
+        public int GetIdByUsername(string? username)
+        {
+            var user = _context.UserInfo.SingleOrDefault(user => user.Username == username);
+            if (user == null)
+            {
+                return 0;
+            }
+            else return user.Id;
         }
 
         public bool UpdateUser(UserModel userToUpdate)
@@ -174,6 +184,12 @@ namespace pillpalbackend.Services
         public UserModel GetUserById(int id)
         {
             return _context.UserInfo.SingleOrDefault(user => user.Id == id);
+        }
+
+        public int HighestId()
+        {
+            int highestId = _context.UserInfo.Max(user => user.Id);
+            return highestId;
         }
 
         public bool DeleteUser(string userToDelete)

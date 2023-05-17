@@ -36,6 +36,13 @@ public class UserController : ControllerBase
         return true;
     }
 
+    [HttpGet]
+    [Route("HighestId")]
+    public int HighestId()
+    {
+        return _data.HighestId();
+    }
+
 
     [HttpGet]
     [Route("IdSearch/{id}")]
@@ -49,6 +56,13 @@ public class UserController : ControllerBase
     public object Username(string username)
     {
         return _data.GetUserByUsername(username);
+    }
+
+    [HttpGet]
+    [Route("IdUserSearch/{username}")]
+    public int GetIdByUsername(string username)
+    {
+        return _data.GetIdByUsername(username);
     }
 
     //Add a user

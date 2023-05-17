@@ -137,7 +137,7 @@ namespace pillpalbackend.Services
                     );
                     var tokenString = new JwtSecurityTokenHandler().WriteToken
                     (tokeOptions);
-                    Result = Ok(new { Token = tokenString });
+                    Result = Ok(new { Token = tokenString,  userId = foundUser.Id });
                 }
             }
 

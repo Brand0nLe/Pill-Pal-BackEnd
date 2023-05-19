@@ -183,13 +183,25 @@ namespace pillpalbackend.Services
 
         public UserModel GetUserById(int id)
         {
-            return _context.UserInfo.SingleOrDefault(user => user.Id == id);
+            return _context.UserInfo
+        .Where(user => user.Id == id)
+        .Select(user => new UserModel
+        {
+            Id = user.Id,
+            Firstname = user.Firstname,
+            Lastname = user.Lastname,
+            Birthday = user.Birthday,
+            Address = user.Address,
+            Username = user.Username,
+
+        })
+        .SingleOrDefault();
         }
 
         public int HighestId()
         {
             int highestId = _context.UserInfo.Max(user => user.Id);
-            highestId++;
+            // highestId++;
             return highestId;
         }
 

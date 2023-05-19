@@ -189,6 +189,7 @@ namespace pillpalbackend.Services
         public int HighestId()
         {
             int highestId = _context.UserInfo.Max(user => user.Id);
+            highestId++;
             return highestId;
         }
 

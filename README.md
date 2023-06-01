@@ -12,6 +12,6 @@ This is a final project for CodeStack Academy, where I worked as the "Product Ma
 
 ## About the Project
 
-[Check out the current progress hosted on azure.](https://pillpalapp.azurewebsites.net/)
+[Check out the current progress hosted on azure.](https://pill-pal.azurewebsites.net/)
 
 [Here is the frontend GitHub repository.](https://github.com/Brand0nLe/pillpalfrontend)

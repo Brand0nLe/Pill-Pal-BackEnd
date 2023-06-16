@@ -15,3 +15,13 @@ This is a final project for CodeStack Academy, where I worked as the "Product Ma
 [Check out the current progress hosted on azure.](https://pill-pal.azurewebsites.net/)
 
 [Here is the frontend GitHub repository.](https://github.com/Brand0nLe/pillpalfrontend)
+
+## Contact
+
+If you have any questions or would like to know more about the project, feel free to reach out to me.
+
+- Email: [brandonctle.dev@gmail.com](mailto:brandonctle.dev@gmail.com)
+- LinkedIn: [https://www.linkedin.com/in/brandonctle](https://www.linkedin.com/in/brandonctle/)
+- Portfolio: [https://brandonle.azurewebsites.net](https://brandonle.azurewebsites.net/)
+
+Thank you for your interest in Pill Pal!
